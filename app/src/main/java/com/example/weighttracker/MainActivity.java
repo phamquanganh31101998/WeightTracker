@@ -2,9 +2,6 @@ package com.example.weighttracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -73,22 +70,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.bmi) {
-            Intent i = new Intent(MainActivity.this, BMI.class);
+            Intent i = new Intent(MainActivity.this, BMIActivity.class);
             startActivity(i);
         } else if (id == R.id.weight) {
-            Intent i = new Intent(MainActivity.this, Weight.class);
+            Intent i = new Intent(MainActivity.this, WeightActivity.class);
             startActivity(i);
         } else if (id == R.id.calo) {
-            Intent i = new Intent(MainActivity.this, Calo.class);
+            Intent i = new Intent(MainActivity.this, CaloActivity.class);
             startActivity(i);
         } else if (id == R.id.diet) {
-            Intent i = new Intent(MainActivity.this, Diet.class);
+            Intent i = new Intent(MainActivity.this, DietActivity.class);
             startActivity(i);
         } else if (id == R.id.food) {
-            Intent i = new Intent(MainActivity.this, Food.class);
+            Intent i = new Intent(MainActivity.this, FoodActivity.class);
             startActivity(i);
         } else if (id == R.id.author) {
-            Intent i = new Intent(MainActivity.this, Author.class);
+            Intent i = new Intent(MainActivity.this, AuthorActivity.class);
             startActivity(i);
         }
 

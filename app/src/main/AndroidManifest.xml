@@ -20,18 +20,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BMI"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Weight"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Calo"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Diet"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Food"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Author"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name=".BMIActivity"
+            android:screenOrientation="portrait"
+            android:label="Tính chỉ số BMI"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".WeightActivity"
+            android:label="Theo dõi cân nặng"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".CaloActivity"
+            android:label="Tính toán lượng Calo"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".DietActivity"
+            android:label="Thực đơn khoa học"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".FoodActivity"
+            android:label="Thông tin thức ăn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".AuthorActivity"
+            android:label="Tác giả"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
