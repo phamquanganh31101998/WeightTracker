@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/bmi"
+            android:title="Tính chỉ số BMI" />
+        <item
+            android:id="@+id/weight"
+            android:title="Theo dõi trọng lượng cơ thể" />
+        <item
+            android:id="@+id/calo"
+            android:title="Theo dõi lượng Calo" />
+        <item
+            android:id="@+id/diet"
+            android:title="Thực đơn tham khảo" />
+        <item
+            android:id="@+id/food"
+            android:title="Thông tin món ăn"
+            />
+    </group>
+
+    <item android:title="Thông tin">
+        <menu>
+            <item
+                android:id="@+id/author"
+                android:title="Tác giả" />
+        </menu>
+    </item>
+
+</menu>
