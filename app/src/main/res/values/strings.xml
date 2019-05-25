@@ -2,27 +2,16 @@
     <string name="app_name">WeightTracker</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Weight Tracker</string>
-    <string name="nav_header_subtitle">Produced by QA and HL</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-<<<<<<< HEAD
-    <string name="weight_kg">Weight (kg)</string>
-    <string name="height_m">Height (m)</string>
-    <string name="calculate">Calculate</string>
-    <string name="metric">Metric</string>
-    <string name="default_unit">@string/metric</string>
-=======
->>>>>>> master
     <string name="weight_metric">Weight in kg</string>
     <string name="height_metric">Height in m</string>
     <string name="weight_imperial">Weight in pounds</string>
     <string name="height_imperial">Height in inch</string>
-<<<<<<< HEAD
-=======
     <string name="more_information">More information on Wikipedia</string>
     <string name="wikipedia_bmi_link">https://en.wikipedia.org/wiki/Body_mass_index</string>
->>>>>>> master
     <string name="bmi_result">BMI: %s</string>
     <string name="bmi_cat_1">Very severely underweight</string>
     <string name="bmi_cat_2">Severely underweight</string>
@@ -35,13 +24,7 @@
     <string name="bmi_cat_9">Obese Class IV (Morbidly Obese)</string>
     <string name="bmi_cat_10">Obese Class V (Super Obese)</string>
     <string name="bmi_cat_11">Obese Class VI (Hyper Obese)</string>
-<<<<<<< HEAD
-    <string name="wikipedia_bmi_link">https://en.wikipedia.org/wiki/Body_mass_index</string>
-    <string name="imperial">Imperial</string>
-    <string name="more_information">More information on Wikipedia</string>
-=======
     <string name="imperial">Imperial</string>
     <string name="metric">Metric</string>
     <string name="default_unit">@string/metric</string>
->>>>>>> master
 </resources>
