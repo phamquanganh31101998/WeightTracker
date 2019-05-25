@@ -1,6 +1,9 @@
 package com.example.weighttracker;
 
+<<<<<<< HEAD
 import java.lang.Object;
+=======
+>>>>>>> master
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;

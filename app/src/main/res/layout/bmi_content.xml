@@ -12,12 +12,22 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+<<<<<<< HEAD
         app:layout_constraintTop_toTopOf="parent">
+=======
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+>>>>>>> master
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+<<<<<<< HEAD
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_height_outer"
                 android:layout_width="wrap_content"
@@ -27,6 +37,17 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
+=======
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txt_height_outer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+>>>>>>> master
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -41,6 +62,7 @@
                     android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:singleLine="true" />
+<<<<<<< HEAD
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -52,6 +74,19 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
+=======
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txt_weight_outer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+>>>>>>> master
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_height_outer">
@@ -65,17 +100,29 @@
                     android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:singleLine="true" />
+<<<<<<< HEAD
             </com.google.android.material.textfield.TextInputLayout>
+=======
+            </android.support.design.widget.TextInputLayout>
+>>>>>>> master
 
             <TextView
                 android:id="@+id/txt_result_bmi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+=======
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+>>>>>>> master
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,17 +133,26 @@
                 android:id="@+id/txt_result_cat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+=======
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+>>>>>>> master
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_result_bmi"
                 tools:text="Normal (healthy weight) " />
 
+<<<<<<< HEAD
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_more_info"
                 android:layout_width="wrap_content"
@@ -106,6 +162,17 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+=======
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_more_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+>>>>>>> master
                 android:text="@string/more_information"
                 android:textColor="#ffffff"
                 app:backgroundTint="@color/colorPrimary"
@@ -116,11 +183,19 @@
             <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+=======
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+>>>>>>> master
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,8 +205,13 @@
                     android:id="@+id/btn_metric"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
                     android:onClick="setSystemOfUnits"
                     android:text="@string/metric"
+=======
+                    android:text="@string/metric"
+                    android:onClick="setSystemOfUnits"
+>>>>>>> master
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -140,10 +220,17 @@
                     android:id="@+id/btn_imperial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:onClick="setSystemOfUnits"
                     android:text="@string/imperial"
+=======
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/imperial"
+                    android:onClick="setSystemOfUnits"
+>>>>>>> master
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_metric"
