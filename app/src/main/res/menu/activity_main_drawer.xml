@@ -14,12 +14,16 @@
             android:id="@+id/calo"
             android:title="Theo dõi lượng Calo" />
         <item
+            android:id="@+id/calo_calculate"
+            android:title="Tính toán lượng Calo "/>
+        <item
             android:id="@+id/diet"
             android:title="Thực đơn tham khảo" />
         <item
             android:id="@+id/food"
-            android:title="Thông tin món ăn"
+            android:title="Tra cứu năng lượng trong món ăn"
             />
+
     </group>
 
     <item android:title="Thông tin">

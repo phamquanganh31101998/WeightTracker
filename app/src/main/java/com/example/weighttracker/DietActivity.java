@@ -41,7 +41,7 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(DietActivity.this, WeightActivity.class);
             startActivity(i);
         } else if (id == R.id.calo) {
-            Intent i = new Intent(DietActivity.this, CaloActivity.class);
+            Intent i = new Intent(DietActivity.this, CaloTrackerActivity.class);
             startActivity(i);
         } else if (id == R.id.diet) {
             Intent i = new Intent(DietActivity.this, DietActivity.class);
@@ -51,6 +51,9 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
         } else if (id == R.id.author) {
             Intent i = new Intent(DietActivity.this, AuthorActivity.class);
+            startActivity(i);
+        } else if (id == R.id.calo_calculate){
+            Intent i = new Intent(DietActivity.this, CaloCalculateActivity.class);
             startActivity(i);
         }
 

@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(MainActivity.this, WeightActivity.class);
             startActivity(i);
         } else if (id == R.id.calo) {
-            Intent i = new Intent(MainActivity.this, CaloActivity.class);
+            Intent i = new Intent(MainActivity.this, CaloTrackerActivity.class);
             startActivity(i);
         } else if (id == R.id.diet) {
             Intent i = new Intent(MainActivity.this, DietActivity.class);
@@ -86,6 +86,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.author) {
             Intent i = new Intent(MainActivity.this, AuthorActivity.class);
+            startActivity(i);
+        } else if (id == R.id.calo_calculate){
+            Intent i = new Intent(MainActivity.this, CaloCalculateActivity.class);
             startActivity(i);
         }
 
