@@ -28,7 +28,7 @@
             android:label="Theo dõi cân nặng"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".CaloActivity"
+        <activity android:name=".CaloTrackerActivity"
             android:label="Tính toán lượng Calo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
@@ -37,11 +37,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".FoodActivity"
-            android:label="Thông tin thức ăn"
+            android:label="Tra cứu năng lượng trong thức ăn"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".AuthorActivity"
             android:label="Tác giả"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".CaloCalculateActivity"
+            android:label="Tính toán lượng Calo đã nạp"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

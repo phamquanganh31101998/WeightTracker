@@ -1,6 +1,9 @@
 package com.example.weighttracker;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,10 +11,33 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class DietActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    RecyclerView recyclerView;
+    CanxiAdapter canxiAdapter;
+    ProteinAdapter proteinAdapter;
+    VitaminAdapter vitaminAdapter;
+    ArrayList<ThucPham> canxiList, proteinList, vitaminList;
+    DatabaseAccess_HL databaseAccess;
+    TextView txtName;
+    TextView txtMoTa;
+    Button btnHuy;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +53,14 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.diet_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        databaseAccess = DatabaseAccess_HL.getInstance(getApplicationContext());
+        databaseAccess.open();
+
+        listCanxi();
+        listProtein();
+        listCanxi();
+        listVitamin();
     }
 
     @Override
@@ -41,7 +75,7 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(DietActivity.this, WeightActivity.class);
             startActivity(i);
         } else if (id == R.id.calo) {
-            Intent i = new Intent(DietActivity.this, CaloActivity.class);
+            Intent i = new Intent(DietActivity.this, CaloTrackerActivity.class);
             startActivity(i);
         } else if (id == R.id.diet) {
             Intent i = new Intent(DietActivity.this, DietActivity.class);
@@ -52,6 +86,9 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.author) {
             Intent i = new Intent(DietActivity.this, AuthorActivity.class);
             startActivity(i);
+        } else if (id == R.id.calo_calculate){
+            Intent i = new Intent(DietActivity.this, CaloCalculateActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.diet_drawer_layout);
@@ -59,4 +96,129 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    public void listCanxi(){
+        canxiList = new ArrayList<>();
+        canxiAdapter = new CanxiAdapter(canxiList, this);
+        recyclerView = (RecyclerView) findViewById(R.id.reViewCanxi);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setAdapter(canxiAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        Cursor dataInfo = databaseAccess.GetData("SELECT * FROM Canxi");
+
+        while (dataInfo.moveToNext()){
+            canxiList.add(new ThucPham(
+                    dataInfo.getInt(0),
+                    dataInfo.getString(1),
+                    dataInfo.getString(2),
+                    dataInfo.getBlob(3)
+            ));
+        }
+
+        canxiAdapter.notifyDataSetChanged();
+    }
+
+    public void listProtein(){
+        proteinList = new ArrayList<>();
+        proteinAdapter = new ProteinAdapter(proteinList, this);
+        recyclerView = (RecyclerView) findViewById(R.id.reViewProtein);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setAdapter(proteinAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        Cursor dataInfo = databaseAccess.GetData("SELECT * FROM Protein");
+
+        while (dataInfo.moveToNext()){
+            proteinList.add(new ThucPham(
+                    dataInfo.getInt(0),
+                    dataInfo.getString(1),
+                    dataInfo.getString(2),
+                    dataInfo.getBlob(3)
+            ));
+        }
+
+        proteinAdapter.notifyDataSetChanged();
+    }
+
+    public void listVitamin(){
+        vitaminList = new ArrayList<>();
+        vitaminAdapter = new VitaminAdapter(vitaminList, this);
+        recyclerView = (RecyclerView) findViewById(R.id.reViewVitamin);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setAdapter(vitaminAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        Cursor dataInfo = databaseAccess.GetData("SELECT * FROM Vitamin");
+
+        while (dataInfo.moveToNext()){
+            vitaminList.add(new ThucPham(
+                    dataInfo.getInt(0),
+                    dataInfo.getString(1),
+                    dataInfo.getString(2),
+                    dataInfo.getBlob(3)
+            ));
+        }
+
+        vitaminAdapter.notifyDataSetChanged();
+    }
+
+    public void DialogCanxi(String ten, String mota){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_canxi);
+
+        txtName = dialog.findViewById(R.id.dialog_name_canxi);
+        txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
+        btnHuy = dialog.findViewById(R.id.btnDong);
+
+        txtName.setText(ten);
+        txtMoTa.setText(mota);
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    public void DialogProtein(String ten, String mota){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_canxi);
+
+        txtName = dialog.findViewById(R.id.dialog_name_canxi);
+        txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
+        btnHuy = dialog.findViewById(R.id.btnDong);
+
+        txtName.setText(ten);
+        txtMoTa.setText(mota);
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    public void DialogVitamin(String ten, String mota){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_canxi);
+
+        txtName = dialog.findViewById(R.id.dialog_name_canxi);
+        txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
+        btnHuy = dialog.findViewById(R.id.btnDong);
+
+        txtName.setText(ten);
+        txtMoTa.setText(mota);
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 }
