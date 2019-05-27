@@ -16,11 +16,11 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class CanxiAdapter extends RecyclerView.Adapter<CanxiAdapter.ViewHolder> {
+public class TongHopAdapter extends RecyclerView.Adapter<TongHopAdapter.ViewHolder> {
     private DietActivity context;
     private List<ThucPham> thucPhamList;
 
-    public CanxiAdapter(List<ThucPham> thucPhams, DietActivity context) {
+    public TongHopAdapter(List<ThucPham> thucPhams, DietActivity context) {
         this.context = context;
         this.thucPhamList = thucPhams;
     }
@@ -32,7 +32,7 @@ public class CanxiAdapter extends RecyclerView.Adapter<CanxiAdapter.ViewHolder> 
 
         // Nạp layout cho View biểu diễn phần tử canxi
         View canxiView =
-                inflater.inflate(R.layout.item_canxi, parent, false);
+                inflater.inflate(R.layout.item_tonghop, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(canxiView);
         return viewHolder;
@@ -44,14 +44,14 @@ public class CanxiAdapter extends RecyclerView.Adapter<CanxiAdapter.ViewHolder> 
         final ThucPham thucPham = thucPhamList.get(position);
 
         holder.textName.setText(thucPham.getTen());
-        final byte[] hinhAnh = thucPham.getHinh();
-        final Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh,0,hinhAnh.length);
-        holder.imageCanxi.setImageBitmap(bitmap);
+        byte[] hinhAnh = thucPham.getHinh();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh,0,hinhAnh.length);
+        holder.imageTongHop.setImageBitmap(bitmap);
 
-        holder.imageCanxi.setOnClickListener(new View.OnClickListener() {
+        holder.imageTongHop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.DialogCanxi(thucPham.getId(),thucPham.getTen(), thucPham.getMoTa(), bitmap);
+                context.DialogTongHop(thucPham.getTen(), thucPham.getMoTa());
             }
         });
     }
@@ -67,16 +67,16 @@ public class CanxiAdapter extends RecyclerView.Adapter<CanxiAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private View itemview;
         public TextView textName;
-        public ImageView imageCanxi;
-//        public TextView textDescription;
+        public ImageView imageTongHop;
+        //        public TextView textDescription;
         public Button detail_button;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemview = itemView;
 //            textDescription = itemView.findViewById(R.id.txtCanxiDescription);
-            textName = itemView.findViewById(R.id.txtCanxi);
-            imageCanxi = itemView.findViewById(R.id.imgCanxi);
+            textName = itemView.findViewById(R.id.txtTongHop);
+            imageTongHop = itemView.findViewById(R.id.imgTongHop);
         }
     }
 

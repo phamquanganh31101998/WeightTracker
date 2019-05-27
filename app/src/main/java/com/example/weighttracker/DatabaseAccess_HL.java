@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 public class DatabaseAccess_HL {
     private SQLiteOpenHelper openHelper;
@@ -28,7 +29,7 @@ public class DatabaseAccess_HL {
 
     //to open the database
     public void open(){
-        this.db = openHelper.getReadableDatabase();
+        this.db = openHelper.getWritableDatabase();
     }
 
     //closing the database connection
@@ -37,6 +38,16 @@ public class DatabaseAccess_HL {
             this.db.close();
         }
     }
+
+//    public void INSERT_DOAN(String ten, String mota, byte[] hinh){
+//        String sql = "INSERT INTO Tonghop VALUES(null, ?, ?, ?)";
+//        SQLiteStatement statement = db.compileStatement(sql);
+//        statement.clearBindings();
+//        statement.bindString(1,ten);
+//        statement.bindString(2,mota);
+//        statement.bindBlob(3,hinh);
+//        statement.executeInsert();
+//    }
 
     public  void  QueryData(String sql){
         db.execSQL(sql);

@@ -4,6 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -25,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class DietActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,11 +37,12 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
     CanxiAdapter canxiAdapter;
     ProteinAdapter proteinAdapter;
     VitaminAdapter vitaminAdapter;
-    ArrayList<ThucPham> canxiList, proteinList, vitaminList;
-    DatabaseAccess_HL databaseAccess;
+    TongHopAdapter tongHopAdapter;
+    ArrayList<ThucPham> canxiList, proteinList, vitaminList, tonghopList;
+    public static DatabaseAccess_HL databaseAccess;
     TextView txtName;
     TextView txtMoTa;
-    Button btnHuy;
+    Button btnHuy, btnThem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +165,28 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         vitaminAdapter.notifyDataSetChanged();
     }
 
-    public void DialogCanxi(String ten, String mota){
+    public void listTongHop(){
+        tonghopList = new ArrayList<>();
+        tongHopAdapter = new TongHopAdapter(tonghopList, this);
+        recyclerView = (RecyclerView) findViewById(R.id.reViewTongHop);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setAdapter(tongHopAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        Cursor dataInfo = databaseAccess.GetData("SELECT * FROM TongHop");
+
+        while (dataInfo.moveToNext()){
+            tonghopList.add(new ThucPham(
+                    dataInfo.getInt(0),
+                    dataInfo.getString(1),
+                    dataInfo.getString(2),
+                    dataInfo.getBlob(3)
+            ));
+        }
+
+        tongHopAdapter.notifyDataSetChanged();
+    }
+
+    public void DialogCanxi(final int id, final String ten, final String mota, final Bitmap bitmap){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_canxi);
@@ -167,6 +194,7 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         txtName = dialog.findViewById(R.id.dialog_name_canxi);
         txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
         btnHuy = dialog.findViewById(R.id.btnDong);
+        btnThem = dialog.findViewById(R.id.btnThem);
 
         txtName.setText(ten);
         txtMoTa.setText(mota);
@@ -177,6 +205,24 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
                 dialog.dismiss();
             }
         });
+
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
+//                byte[] hinhAnh = byteArray.toByteArray();
+//                DietActivity.databaseAccess.INSERT_DOAN(
+//                        ten,
+//                        mota,
+//                        hinhAnh
+//                );
+//
+                Toast.makeText(DietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(DietActivity.this, DietActivity.class));
+            }
+        });
+
         dialog.show();
     }
 
@@ -188,6 +234,7 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         txtName = dialog.findViewById(R.id.dialog_name_canxi);
         txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
         btnHuy = dialog.findViewById(R.id.btnDong);
+        btnThem = dialog.findViewById(R.id.btnThem);
 
         txtName.setText(ten);
         txtMoTa.setText(mota);
@@ -198,6 +245,14 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
                 dialog.dismiss();
             }
         });
+
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         dialog.show();
     }
 
@@ -209,6 +264,7 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         txtName = dialog.findViewById(R.id.dialog_name_canxi);
         txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
         btnHuy = dialog.findViewById(R.id.btnDong);
+        btnThem = dialog.findViewById(R.id.btnThem);
 
         txtName.setText(ten);
         txtMoTa.setText(mota);
@@ -217,6 +273,42 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+            }
+        });
+
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
+    }
+
+    public void DialogTongHop(String ten, String mota){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_canxi);
+
+        txtName = dialog.findViewById(R.id.dialog_name_canxi);
+        txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
+        btnHuy = dialog.findViewById(R.id.btnDong);
+        btnThem = dialog.findViewById(R.id.btnThem);
+
+        txtName.setText(ten);
+        txtMoTa.setText(mota);
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
