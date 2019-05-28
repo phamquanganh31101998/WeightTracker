@@ -2,6 +2,7 @@ package com.example.weighttracker;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -20,14 +21,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class WeightActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DatePicker date_picker;
-    TextView weight_dialog, weight_ngay;
+    TextView weight_dialog, weight_ngay, txt_weight_ngaycu_weight;
     EditText edtWeight;
     Button btnWeight_yes, btnWeight_no;
     AutoCompleteTextView autoTextView;
+    ArrayList<CanNang> canNangList;
+    DatabaseWeight databaseWeight;
+    String getCanNang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,13 @@ public class WeightActivity extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = (NavigationView) findViewById(R.id.weight_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        databaseWeight = new DatabaseWeight(this, "ghichu.sqlite",null,1);
+        databaseWeight.QueryData("CREATE TABLE IF NOT EXISTS Weight_DB_Update(Id INTEGER PRIMARY KEY AUTOINCREMENT, CanNang NVARCHAR(20), Ngay NVACHAR(20))");
+
+        databaseWeight.QueryData("INSERT INTO Weight_DB_Update VALUES(null, '52', '25\\5\\2019')");
+        databaseWeight.QueryData("INSERT INTO Weight_DB_Update VALUES(null, '52', '25\\5\\2019')");
+        databaseWeight.QueryData("INSERT INTO Weight_DB_Update VALUES(null, '52', '25\\5\\2019')");
+
         date_picker = (DatePicker)findViewById(R.id.date_picker_weight);
         setupDatePicker();
     }
@@ -52,33 +65,89 @@ public class WeightActivity extends AppCompatActivity implements NavigationView.
     public void setupDatePicker(){
         Calendar calendar = Calendar.getInstance();
         // Lấy ra năm - tháng - ngày hiện tại
-        int year = calendar.get(calendar.YEAR);
+        final int year_real = calendar.get(calendar.YEAR);
         final int month = calendar.get(calendar.MONTH);
-        int day = calendar.get(calendar.DAY_OF_MONTH);
+        final int day = calendar.get(calendar.DAY_OF_MONTH);
         // Khởi tạo sự kiện lắng nghe khi DatePicker thay đổi
-        date_picker.init(year,month,day,new DatePicker.OnDateChangedListener() {
+        date_picker.init(year_real,month,day,new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 int d = dayOfMonth;
                 int m = monthOfYear + 1;
                 int y = year;
-//                Toast.makeText(WeightActivity.this, "Đã chọn ngày " + d + "/" + m + "/" + y, Toast.LENGTH_SHORT).show();
-                DialogNgay(d,m,y);
+
+                if(year > year_real){
+                    Toast.makeText(WeightActivity.this, "Bạn không được nhập ngày ở tương lai", Toast.LENGTH_SHORT).show();
+                }
+                else if(year_real == year){
+                    if(monthOfYear > month){
+                        Toast.makeText(WeightActivity.this, "Bạn không được nhập ngày ở tương lai", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(month == monthOfYear){
+                        if(dayOfMonth > day){
+                            Toast.makeText(WeightActivity.this, "Bạn không được nhập ngày ở tương lai", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(dayOfMonth == day){
+                            DialogNgay(d,m,y);
+                        }
+                        else {
+                            DiaLogNgayCu(d,m,y);
+                        }
+                    }
+                    else {
+                        DiaLogNgayCu(d,m,y);
+                    }
+                }
+                else {
+                    DiaLogNgayCu(d,m,y);
+                }
+//                DialogNgay(d,m,y);
             }
         });
     }
 
-    public void DialogNgay(int d, int m, int y){
+    public void DiaLogNgayCu(int d, int m, int y){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.weight_dialog_cu);
+        String date = d + "\\" + m + "\\" + y;
+        String ngay = date.trim();
+        txt_weight_ngaycu_weight = dialog.findViewById(R.id.txt_weight_cannang_cu);
+        Cursor dataCanNang = databaseWeight.GetData("SELECT * FROM Weight_DB_Update WHERE Ngay = '"+ ngay +"'");
+        while (dataCanNang.moveToNext()){
+            getCanNang = dataCanNang.getString(1) + " kg";
+        }
+//        txt_weight_ngaycu.setText(dataCanNang.getString(1));
+        txt_weight_ngaycu_weight.setText(getCanNang);
+
+        dialog.show();
+    }
+
+    public void DialogNgay(final int d,final int m,final int y){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.weight_dialog);
         String date = "Ngày " + d + " Tháng " + m + " Năm " + y;
+
         weight_ngay = dialog.findViewById(R.id.txt_weight_dialog_ngay);
         btnWeight_yes = dialog.findViewById(R.id.btn_weight_dialog);
         btnWeight_no = dialog.findViewById(R.id.btn_weight_huy);
+        autoTextView = dialog.findViewById(R.id.auto_textview_weight);
+
 
         weight_ngay.setText(date);
-//        Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
+
+        btnWeight_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String strcannang = autoTextView.getText().toString();
+                String ngay = "" + d + "\\" + m + "\\" + y;
+                databaseWeight.QueryData("INSERT INTO Weight_DB_Update VALUES(null, '"+ strcannang +"', '"+ ngay +"')");
+                Toast.makeText(WeightActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        
         btnWeight_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
