@@ -45,13 +45,13 @@ public class ProteinAdapter extends RecyclerView.Adapter<ProteinAdapter.ViewHold
 
         holder.textName.setText(thucPham.getTen());
         byte[] hinhAnh = thucPham.getHinh();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh,0,hinhAnh.length);
+        final Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh,0,hinhAnh.length);
         holder.imageProtein.setImageBitmap(bitmap);
 
         holder.imageProtein.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.DialogProtein(thucPham.getTen(), thucPham.getMoTa());
+                context.DialogProtein(thucPham.getId(),thucPham.getTen(), thucPham.getMoTa(), bitmap);
             }
         });
     }

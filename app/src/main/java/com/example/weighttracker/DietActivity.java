@@ -1,13 +1,9 @@
 package com.example.weighttracker;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,21 +11,17 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class DietActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,10 +29,10 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
     CanxiAdapter canxiAdapter;
     ProteinAdapter proteinAdapter;
     VitaminAdapter vitaminAdapter;
-    TongHopAdapter tongHopAdapter;
-    ArrayList<ThucPham> canxiList, proteinList, vitaminList, tonghopList;
+    ArrayList<ThucPham> canxiList, proteinList, vitaminList;
     public static DatabaseAccess_HL databaseAccess;
-    TextView txtName;
+    TextView txtName, txtTongHop1, txtTongHop2, txtTongHop3;
+    ImageView imgTongHop1, imgTongHop2, imgTongHop3;
     TextView txtMoTa;
     Button btnHuy, btnThem;
 
@@ -106,7 +98,6 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         canxiList = new ArrayList<>();
         canxiAdapter = new CanxiAdapter(canxiList, this);
         recyclerView = (RecyclerView) findViewById(R.id.reViewCanxi);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setAdapter(canxiAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         Cursor dataInfo = databaseAccess.GetData("SELECT * FROM Canxi");
@@ -127,7 +118,6 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         proteinList = new ArrayList<>();
         proteinAdapter = new ProteinAdapter(proteinList, this);
         recyclerView = (RecyclerView) findViewById(R.id.reViewProtein);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setAdapter(proteinAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         Cursor dataInfo = databaseAccess.GetData("SELECT * FROM Protein");
@@ -148,7 +138,6 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         vitaminList = new ArrayList<>();
         vitaminAdapter = new VitaminAdapter(vitaminList, this);
         recyclerView = (RecyclerView) findViewById(R.id.reViewVitamin);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setAdapter(vitaminAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         Cursor dataInfo = databaseAccess.GetData("SELECT * FROM Vitamin");
@@ -165,31 +154,10 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         vitaminAdapter.notifyDataSetChanged();
     }
 
-    public void listTongHop(){
-        tonghopList = new ArrayList<>();
-        tongHopAdapter = new TongHopAdapter(tonghopList, this);
-        recyclerView = (RecyclerView) findViewById(R.id.reViewTongHop);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setAdapter(tongHopAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        Cursor dataInfo = databaseAccess.GetData("SELECT * FROM TongHop");
-
-        while (dataInfo.moveToNext()){
-            tonghopList.add(new ThucPham(
-                    dataInfo.getInt(0),
-                    dataInfo.getString(1),
-                    dataInfo.getString(2),
-                    dataInfo.getBlob(3)
-            ));
-        }
-
-        tongHopAdapter.notifyDataSetChanged();
-    }
-
     public void DialogCanxi(final int id, final String ten, final String mota, final Bitmap bitmap){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_canxi);
+        dialog.setContentView(R.layout.dialog_thucan);
 
         txtName = dialog.findViewById(R.id.dialog_name_canxi);
         txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
@@ -209,27 +177,22 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
-//                byte[] hinhAnh = byteArray.toByteArray();
-//                DietActivity.databaseAccess.INSERT_DOAN(
-//                        ten,
-//                        mota,
-//                        hinhAnh
-//                );
-//
+                imgTongHop1 = findViewById(R.id.imgViewTongHop1);
+                txtTongHop1 = findViewById(R.id.txtTongHop1);
+                txtTongHop1.setText(ten);
+                imgTongHop1.setImageBitmap(bitmap);
                 Toast.makeText(DietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(DietActivity.this, DietActivity.class));
+                dialog.dismiss();
             }
         });
 
         dialog.show();
     }
 
-    public void DialogProtein(String ten, String mota){
+    public void DialogProtein(final int id, final String ten, final String mota, final Bitmap bitmap){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_canxi);
+        dialog.setContentView(R.layout.dialog_thucan);
 
         txtName = dialog.findViewById(R.id.dialog_name_canxi);
         txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
@@ -249,17 +212,22 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imgTongHop2 = findViewById(R.id.imgViewTongHop2);
+                txtTongHop2 = findViewById(R.id.txtTongHop2);
+                txtTongHop2.setText(ten);
+                imgTongHop2.setImageBitmap(bitmap);
                 Toast.makeText(DietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
 
         dialog.show();
     }
 
-    public void DialogVitamin(String ten, String mota){
+    public void DialogVitamin(final int id, final String ten, final String mota, final Bitmap bitmap){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_canxi);
+        dialog.setContentView(R.layout.dialog_thucan);
 
         txtName = dialog.findViewById(R.id.dialog_name_canxi);
         txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
@@ -279,36 +247,12 @@ public class DietActivity extends AppCompatActivity implements NavigationView.On
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imgTongHop3 = findViewById(R.id.imgViewTongHop3);
+                txtTongHop3 = findViewById(R.id.txtTongHop3);
+                txtTongHop3.setText(ten);
+                imgTongHop3.setImageBitmap(bitmap);
                 Toast.makeText(DietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-            }
-        });
-        dialog.show();
-    }
-
-    public void DialogTongHop(String ten, String mota){
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_canxi);
-
-        txtName = dialog.findViewById(R.id.dialog_name_canxi);
-        txtMoTa = dialog.findViewById(R.id.dialog_mota_canxi);
-        btnHuy = dialog.findViewById(R.id.btnDong);
-        btnThem = dialog.findViewById(R.id.btnThem);
-
-        txtName.setText(ten);
-        txtMoTa.setText(mota);
-
-        btnHuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 dialog.dismiss();
-            }
-        });
-
-        btnThem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(DietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();

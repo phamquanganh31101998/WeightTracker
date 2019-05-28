@@ -45,13 +45,13 @@ public class VitaminAdapter extends RecyclerView.Adapter<VitaminAdapter.ViewHold
 
         holder.textName.setText(thucPham.getTen());
         byte[] hinhAnh = thucPham.getHinh();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh,0,hinhAnh.length);
+        final Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh,0,hinhAnh.length);
         holder.imageVitamin.setImageBitmap(bitmap);
 
         holder.imageVitamin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.DialogProtein(thucPham.getTen(), thucPham.getMoTa());
+                context.DialogVitamin(thucPham.getId(),thucPham.getTen(), thucPham.getMoTa(), bitmap);
             }
         });
     }

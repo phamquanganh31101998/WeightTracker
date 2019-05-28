@@ -28,13 +28,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgCanxi" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/txtCanxiDescription"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="28dp"-->
-        <!--android:layout_marginTop="28dp"-->
-        <!--android:text="Mô tả"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/imgCanxi"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
 </android.support.constraint.ConstraintLayout>

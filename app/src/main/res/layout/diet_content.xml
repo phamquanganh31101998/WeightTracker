@@ -105,6 +105,7 @@
                         android:src="@drawable/cahoi" />
 
                     <TextView
+                        android:id="@+id/txtTongHop1"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginStart="4dp"
@@ -132,6 +133,7 @@
                         android:src="@drawable/thitvit" />
 
                     <TextView
+                        android:id="@+id/txtTongHop2"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginStart="4dp"
@@ -159,6 +161,7 @@
                         android:src="@drawable/dudu" />
 
                     <TextView
+                        android:id="@+id/txtTongHop3"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginStart="4dp"
