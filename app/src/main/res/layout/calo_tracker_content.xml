@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".CaloTrackerActivity"
-    tools:showIn="@layout/calo_tracker_bar_main">
+    tools:showIn="@layout/calo_tracker_bar_main"
+    android:background="@drawable/background_8">
 
     <LinearLayout
         android:orientation="vertical"
@@ -16,36 +17,60 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/date_picker" />
-        <TextView
-            android:id="@+id/current_calo"
-            android:text="Calo hiện tại: 2000Kcal"
+            android:id="@+id/calo_tracker_date_picker" />
+        <LinearLayout
+            android:background="#F3C787"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/note"
-            android:text="Hôm nay ăn nhiều vl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/average_calo"
-            android:text="Lượng calo tiêu thụ trung bình: 2000Kcal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/max_calo"
-            android:text="Lượng calo tiêu thụ cao nhất: 2000Kcal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/min_calo"
-            android:text="Lượng calo tiêu thụ cao nhất: 2000Kcal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/calo_tracker_current_calo"
+                android:text="Lượng Calo tiêu thụ trong ngày: "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"/>
+            <TextView
+                android:textSize="16dp"
+                android:id="@+id/calo_tracker_note"
+                android:text="Ghi chú: "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="16dp"
+                android:id="@+id/calo_tracker_sum"
+                android:text="Tổng lượng calo đã tiêu thụ: "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="16dp"
+                android:id="@+id/calo_tracker_average_calo"
+                android:text="Lượng calo tiêu thụ trung bình: "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="16dp"
+                android:id="@+id/calo_tracker_max_calo"
+                android:text="Lượng calo tiêu thụ cao nhất: "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="16dp"
+                android:id="@+id/calo_tracker_min_calo"
+                android:text="Lượng calo tiêu thụ thấp nhất: "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <Button
-            android:id="@+id/edit"
+            android:id="@+id/calo_tracker_edit"
             android:text="Xem chi tiết ngày"
+            android:background="#FF0000"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
 </ScrollView>

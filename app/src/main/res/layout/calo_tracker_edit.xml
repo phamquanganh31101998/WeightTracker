@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="20dp">
+        <TableRow>
+            <TextView android:text="Ngày: "/>
+        </TableRow>
+        <TableRow>
+            <TextView android:id="@+id/calo_tracker_date"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="Lượng calo:"/>
+
+        </TableRow>
+        <TableRow>
+            <EditText android:id="@+id/calo_tracker_new_calo"
+                android:inputType="number"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="Ghi chú: "/>
+        </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/calo_tracker_new_note"
+                android:layout_width="231dp"
+                android:inputType="textMultiLine"
+                android:maxLines="10" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

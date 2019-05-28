@@ -29,7 +29,7 @@ public class FoodAdapter extends ArrayAdapter<Food>{
             view = LayoutInflater.from(viewGroup.getContext()).inflate(resource, viewGroup, false);
         }
         TextView food_info = (TextView)view.findViewById(R.id.food_info);
-        Button food_info_btn = (Button)view.findViewById(R.id.food_info_btn);
+        Button food_info_btn = (Button) view.findViewById(R.id.food_info_btn);
         food_info_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    >
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/bmi"
+            android:icon="@drawable/ic_runningman"
             android:title="Tính chỉ số BMI" />
         <item
             android:id="@+id/weight"
-            android:title="Theo dõi trọng lượng cơ thể" />
+            android:icon="@drawable/ic_weight"
+            android:title="Theo dõi cân nặng" />
         <item
             android:id="@+id/calo"
+            android:icon="@drawable/ic_calendar"
             android:title="Theo dõi lượng Calo" />
         <item
             android:id="@+id/calo_calculate"
+            android:icon="@drawable/ic_calculator"
             android:title="Tính toán lượng Calo "/>
         <item
             android:id="@+id/diet"
+            android:icon="@drawable/ic_salad"
             android:title="Thực đơn tham khảo" />
         <item
             android:id="@+id/food"
-            android:title="Tra cứu năng lượng trong món ăn"
+            android:icon="@drawable/ic_hamburger"
+            android:title="Năng lượng thực phẩm"
             />
 
     </group>
@@ -29,6 +36,7 @@
     <item android:title="Thông tin">
         <menu>
             <item
+                android:icon="@drawable/ic_copyright"
                 android:id="@+id/author"
                 android:title="Tác giả" />
         </menu>

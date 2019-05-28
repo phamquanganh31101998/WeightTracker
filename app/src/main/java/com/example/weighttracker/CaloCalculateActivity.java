@@ -50,7 +50,7 @@ public class CaloCalculateActivity extends AppCompatActivity implements Navigati
 
         //code here
         quantity = (EditText) findViewById(R.id.etquantity);
-        calories = (TextView) findViewById(R.id.calories);
+        //calories = (TextView) findViewById(R.id.calories);
         Food_cal = (TextView) findViewById(R.id.Food_cal);
         total_calo = (TextView) findViewById(R.id.total_calo);
         add = (Button) findViewById(R.id.add);
@@ -63,7 +63,8 @@ public class CaloCalculateActivity extends AppCompatActivity implements Navigati
                     Food f = db.getFoodByName(label);
                     int calo_new = f.getCalo() * Integer.parseInt(quantity.getText().toString());
                     total = total + calo_new;
-                    Toast.makeText(getApplicationContext(),"Total now: " + total,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Đã thêm " + quantity.getText().toString() + " "
+                            + f.getUnit() + " " + f.getName(),Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(CaloCalculateActivity.this, "Hãy nhập số lượng",
                             Toast.LENGTH_LONG).show();
@@ -84,7 +85,8 @@ public class CaloCalculateActivity extends AppCompatActivity implements Navigati
 //                                    + " "+ f.getUnit() + " "+ f.getName(),
 //                            Toast.LENGTH_LONG).show();
                     int caloOfThis = f.getCalo() * Integer.parseInt(quantity.getText().toString());
-                    Food_cal.setText((new Integer(caloOfThis)).toString());
+                    Food_cal.setText(quantity.getText().toString() + " " + f.getUnit() + " " + f.getName()
+                            + " có năng lượng: " + (new Integer(caloOfThis)).toString() + " calo");
                 } else {
                     Toast.makeText(CaloCalculateActivity.this, "Hãy nhập số lượng",
                             Toast.LENGTH_LONG).show();
@@ -95,7 +97,7 @@ public class CaloCalculateActivity extends AppCompatActivity implements Navigati
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                total_calo.setText(total + " calo");
+                total_calo.setText("Tổng năng lượng: " + total + " calo");
             }
         });
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -104,7 +106,7 @@ public class CaloCalculateActivity extends AppCompatActivity implements Navigati
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String label = parent.getItemAtPosition(position).toString();
-                Toast.makeText(parent.getContext(), "You selected: " + label,
+                Toast.makeText(parent.getContext(), "Bạn đã chọn: " + label,
                         Toast.LENGTH_LONG).show();
             }
 

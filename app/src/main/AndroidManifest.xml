@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_seafood"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_seafood_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -37,7 +37,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".FoodActivity"
-            android:label="Tra cứu năng lượng trong thức ăn"
+            android:label="Tra cứu năng lượng thực phẩm"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".AuthorActivity"
@@ -45,7 +45,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".CaloCalculateActivity"
-            android:label="Tính toán lượng Calo đã nạp"
+            android:label="Tính toán lượng Calo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
